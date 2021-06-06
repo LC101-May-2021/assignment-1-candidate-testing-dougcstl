@@ -8,9 +8,10 @@ let candidateName = "";
 let question = "Who was the first American woman in space? "; 
 let correctAnswer = "Sally Ride"; 
 let candidateAnswer;   
-let questions = ['Who was the first American woman in space? ','True or false: 5 kilometer == 5000 meters? ','(5+3)/2*10=? ','Given the array [8, "Orbit","Trajectory", 45], what entry is at index 2? ','What is the minimum crew size for the ISS? '];
+let questions = ['1) Who was the first American woman in space? ','2) True or false: 5 kilometer == 5000 meters? ','3) (5+3)/2*10=? ','4) Given the array [8, "Orbit","Trajectory", 45], what entry is at index 2? ','5) What is the minimum crew size for the ISS? '];
 let correctAnswers = ['Sally Ride','true','40','Trajectory','3'];
-let candidateAnswers =[];
+let candidateAnswers = [];
+let numberCorrect = 0;
 
 
 function askForName() {
@@ -30,7 +31,8 @@ function askQuestion() {
   for (let i = 0; i < questions.length; i++) {
     let answer = input.question(questions[i]);
     candidateAnswers.push(answer);
-    // console.log(candidateAnswers);
+    //console.log("Your answer: " + candidateAnswers[i]);
+    // console.log("Correct answer: " + correctAnswers[i] + "\n");
     // console.log(questions[i]); 
   }
 } 
@@ -41,15 +43,45 @@ function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
 
-if (candidateAnswer === correctAnswer) {
+/* if (candidateAnswers === correctAnswers) {
  console.log("Correct answer")
-} else {console.log("Incorrect answer.")
+} else {
+  console.log("Incorrect answer.")
+} */
+console.log("Candidate Name: " + candidateName + "\n");
+
+  for (i = 0; i < questions.length; i++) {
+    if (candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()) {
+      numberCorrect++
+      // console.log(numberCorrect);
+    } 
+    console.log(questions[i]);
+    console.log(`Your answer: ${candidateAnswers[i]}`);
+    console.log(`Correct answer: ${correctAnswers[i]}` + "\n");
+  }
+let grade = (numberCorrect/questions.length)*100;
+
+
+// console.log(">>> Overall Grade: " + (grade) + "%" + (grade) + " (of 5 responses correct) <<<");
+ //console.log("Your answer: " + candidateAnswers[i]);
+    // console.log("Correct answer: " + correctAnswers[i] + "\n");
+
+
+
+console.log(`>>> Overall Grade: ${grade}% (${numberCorrect} of ${questions.length} respones correct) <<<`);
+
+if (grade >= 80) {
+  console.log(">>> Status: PASSED <<<");
+} else {
+  console.log(">>> Status: FAILED <<<");
 }
-  let grade;
   
 
   return grade;
+// }
 }
+
+
 
 function runProgram() {
   askForName();
